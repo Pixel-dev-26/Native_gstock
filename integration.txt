@@ -1,0 +1,57 @@
+__ Font :
+FF : Geist
+
+___ Login :
+Welcome Back : 29.96 Bold
+Sign in to access your secure workspace : 16.05 Regular
+Email Address : 13 Semi-Bold
+sarah.chen@design.co : 14 Medium
+Password : 13 Semi-Bold
+•••••••• : 14 Medium
+Forgot password? : 13 Semi-Bold
+Log in : 15 Semi-Bold
+or continue with : 12 Medium
+Google : 14 Medium
+Appel : 14 Medium
+Don't have an account? : 14 Medium
+Sign up : 14 Semi-Bold 
+
+ 
+___ Forgot Password : 
+Reset Password : 29.96 Bold
+Enter the email associated with your account and we'll send instructions to reset your password. : 16.05 Regular
+Email Address : 13 Semi-Bold
+sarah.chen@design.co : 14 Medium
+Send Reset Link : 15 Semi-Bold
+Back to Log In : 14 Semi-Bold
+
+
+_ Components : 
+__TextCustomise  :
+h1 : 29.96 Bold
+paragraph : 16.05 Regular
+btn : 15 Semi-Bold
+txtBack : 14 Semi-Bold
+txtMedium : 14 Medium
+normal : 13 Semi-Bold
+default : 12 Medium
+
+
+_Input :
+
+__View
+width : 342
+heigth : 52
+padding-left : 20
+padding-right : 20
+gap : 12
+
+__Img 
+w : 20
+h : 20
+
+__ TextInput
+placeholder ::: 14 Medium
+
+__ Label 
+13 Semi-Bold

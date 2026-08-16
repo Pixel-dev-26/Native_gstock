@@ -4,16 +4,19 @@ import Input from "@/components/input";
 import MediaBtn from "@/components/mediaBtn";
 import TextCustomise from "@/components/textCustomise";
 import { useTheme } from "@/components/themeProvider";
+import { useAuth } from "@/contexts/AuthContext";
 import { Ionicons } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import { Link, useRouter } from "expo-router";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
+  ActivityIndicator,
   KeyboardAvoidingView,
   Platform,
   Pressable,
   ScrollView,
   StyleSheet,
+  Text,
   View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -21,7 +24,33 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function Index() {
   const router = useRouter();
   const { colors, theme, toggleTheme } = useTheme();
+  const { login, isLoading, error, clearError, isAuthenticated } = useAuth();
+  const [email, setEmail] = useState("test@example.com");
+  const [password, setPassword] = useState("password123");
+  const [visibleError, setVisibleError] = useState(false);
   const isLight = theme === "light";
+  const [eyes, setEyes] = useState(true);
+
+  useEffect(() => {
+    if (error) {
+      setVisibleError(true);
+    }
+  }, [error]);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.replace("/dashboard" as any);
+    }
+  }, [isAuthenticated, router]);
+
+  const handleLogin = async () => {
+    clearError();
+    const ok = await login(email.trim(), password);
+
+    if (ok) {
+      router.replace("/dashboard" as any);
+    }
+  };
 
   return (
     <SafeAreaView
@@ -80,14 +109,40 @@ export default function Index() {
                   <Input
                     imageSrc={require("@/assets/images/mail.svg")}
                     placeholder="sarah.chen@design.co"
+                    value={email}
+                    onChangeText={setEmail}
+                    autoCapitalize="none"
+                    keyboardType="email-address"
                   />
                 </View>
                 <View>
                   <TextCustomise typeText="normal">Password</TextCustomise>
-                  <Input
-                    imageSrc={require("@/assets/images/lock.svg")}
-                    placeholder="password"
-                  />
+                  <View
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Input
+                      imageSrc={require("@/assets/images/lock.svg")}
+                      placeholder="password"
+                      value={password}
+                      onChangeText={setPassword}
+                      secureTextEntry={eyes}
+                    />
+
+                    <Pressable
+                      onPress={() => setEyes((prev) => !prev)}
+                      style={{ position: "relative", right: 30 }}
+                    >
+                      <Ionicons
+                        name={eyes ? "eye-off" : "eye"}
+                        size={18}
+                        color={colors.textMuted}
+                      />
+                    </Pressable>
+                  </View>
                 </View>
               </View>
               <Link
@@ -101,11 +156,36 @@ export default function Index() {
             </View>
             <View style={styles.card3}>
               <Button
-                txt="Log In"
-                onPress={() => {
-                  router.push("/auth");
-                }}
+                txt={isLoading ? "Loading..." : "Log In"}
+                onPress={handleLogin}
+                disabled={isLoading}
               />
+              {visibleError && error ? (
+                <View
+                  style={[styles.snackbar, { backgroundColor: colors.surface }]}
+                >
+                  <Text style={[styles.snackbarText, { color: colors.text }]}>
+                    {error}
+                  </Text>
+                  <Pressable
+                    onPress={() => {
+                      setVisibleError(false);
+                      clearError();
+                    }}
+                  >
+                    <Text
+                      style={[styles.snackbarAction, { color: colors.primary }]}
+                    >
+                      Fermer
+                    </Text>
+                  </Pressable>
+                </View>
+              ) : null}
+              {isLoading ? (
+                <View style={styles.loaderContainer}>
+                  <ActivityIndicator color={colors.primary} />
+                </View>
+              ) : null}
               <View style={styles.LineCard}>
                 <View style={[styles.line, { backgroundColor: colors.line }]} />
                 <TextCustomise
@@ -212,5 +292,28 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     gap: 12,
+  },
+  snackbar: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderRadius: 12,
+    borderWidth: 1,
+    gap: 12,
+  },
+  snackbarText: {
+    flex: 1,
+    fontSize: 13,
+  },
+  snackbarAction: {
+    fontSize: 13,
+    fontWeight: "600",
+  },
+  loaderContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+    minHeight: 20,
   },
 });

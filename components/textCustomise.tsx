@@ -1,3 +1,4 @@
+import { useTheme } from "@/components/themeProvider";
 import { StyleSheet, Text, TextStyle, View } from "react-native";
 
 type TextCustomiseProps = {
@@ -11,9 +12,13 @@ const TextCustomise: React.FC<TextCustomiseProps> = ({
   children,
   style,
 }) => {
+  const { colors } = useTheme();
+
   return (
     <View>
-      <Text style={[styles[typeText], style]}>{children}</Text>
+      <Text style={[styles[typeText], { color: colors.text }, style]}>
+        {children}
+      </Text>
     </View>
   );
 };

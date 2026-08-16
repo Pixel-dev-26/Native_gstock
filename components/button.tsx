@@ -1,19 +1,25 @@
+import { useTheme } from "@/components/themeProvider";
 import React from "react";
 import {
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    TouchableOpacityProps,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  TouchableOpacityProps,
 } from "react-native";
 
 interface BtnProps extends TouchableOpacityProps {
   txt: string;
 }
 
-const Button: React.FC<BtnProps> = ({ txt, ...rest }) => {
+const Button: React.FC<BtnProps> = ({ txt, style, ...rest }) => {
+  const { colors } = useTheme();
+
   return (
-    <TouchableOpacity style={styles.btn} {...rest}>
-      <Text style={styles.txtbtn}>{txt}</Text>
+    <TouchableOpacity
+      style={[styles.btn, { backgroundColor: colors.primary }, style]}
+      {...rest}
+    >
+      <Text style={[styles.txtbtn, { color: colors.onPrimary }]}>{txt}</Text>
     </TouchableOpacity>
   );
 };
@@ -22,14 +28,12 @@ const styles = StyleSheet.create({
   btn: {
     height: 54,
     borderRadius: 28,
-    backgroundColor: "#4F46E5",
     justifyContent: "center",
     alignItems: "center",
   },
   txtbtn: {
     fontSize: 15,
     fontWeight: "semibold",
-    color: "#fff",
   },
 });
 

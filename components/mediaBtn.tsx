@@ -1,3 +1,4 @@
+import { useTheme } from "@/components/themeProvider";
 import { Image } from "expo-image";
 import React from "react";
 import {
@@ -14,12 +15,22 @@ interface mediaBtnProps extends TouchableOpacityProps {
   imgsrc?: ImageRequireSource;
 }
 
-const MediaBtn: React.FC<mediaBtnProps> = ({ txt, imgsrc, ...rest }) => {
+const MediaBtn: React.FC<mediaBtnProps> = ({ txt, imgsrc, style, ...rest }) => {
+  const { colors } = useTheme();
+
   return (
-    <TouchableOpacity {...rest}>
-      <View style={styles.container}>
+    <TouchableOpacity {...rest} style={style}>
+      <View
+        style={[
+          styles.container,
+          {
+            backgroundColor: colors.surface,
+            borderColor: colors.border,
+          },
+        ]}
+      >
         <Image source={imgsrc} style={styles.img} />
-        <Text>{txt}</Text>
+        <Text style={{ color: colors.text }}>{txt}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -31,11 +42,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     gap: 5,
-    backgroundColor: "#fff",
     width: 165,
     height: 52,
     borderWidth: 1,
-    borderColor: "#222121",
     borderRadius: 28,
   },
   img: {

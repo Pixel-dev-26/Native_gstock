@@ -1,3 +1,4 @@
+import { useTheme } from "@/components/themeProvider";
 import { Image } from "expo-image";
 import {
   ImageRequireSource,
@@ -20,13 +21,24 @@ const Input: React.FC<InputProps> = ({
   containerStyle,
   ...rest
 }) => {
+  const { colors } = useTheme();
+
   return (
-    <View style={[styles.container, containerStyle]}>
+    <View
+      style={[
+        styles.container,
+        {
+          backgroundColor: colors.inputBg,
+          borderColor: colors.inputBorder,
+        },
+        containerStyle,
+      ]}
+    >
       <Image source={imageSrc} style={styles.image} />
       <TextInput
         placeholder={placeholder}
-        placeholderTextColor="#999"
-        style={styles.input}
+        placeholderTextColor={colors.textMuted}
+        style={[styles.input, { color: colors.text }]}
         {...rest}
       />
     </View>
@@ -39,9 +51,7 @@ const styles = StyleSheet.create({
     height: 52,
     paddingHorizontal: 20,
     borderRadius: 28,
-    backgroundColor: "#f5f5f5",
     borderWidth: 1,
-    borderColor: "#e0e0e0",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-start",

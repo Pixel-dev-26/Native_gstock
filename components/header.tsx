@@ -1,3 +1,4 @@
+import { useTheme } from "@/components/themeProvider";
 import { StyleSheet, View } from "react-native";
 import TextCustomise from "./textCustomise";
 
@@ -7,12 +8,17 @@ interface TextHeaderProps {
 }
 
 const Header: React.FC<TextHeaderProps> = ({ title, txt }) => {
+  const { colors } = useTheme();
+
   return (
     <View style={styles.container}>
-      <TextCustomise typeText="h1" style={styles.txt}>
+      <TextCustomise typeText="h1" style={[styles.txt, { color: colors.text }]}>
         {title}
       </TextCustomise>
-      <TextCustomise typeText="paragraph" style={styles.txt}>
+      <TextCustomise
+        typeText="paragraph"
+        style={[styles.txt, { color: colors.textMuted }]}
+      >
         {txt}
       </TextCustomise>
     </View>

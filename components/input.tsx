@@ -1,11 +1,11 @@
 import { Image } from "expo-image";
 import {
-    ImageRequireSource,
-    StyleSheet,
-    TextInput,
-    TextInputProps,
-    View,
-    ViewStyle,
+  ImageRequireSource,
+  StyleSheet,
+  TextInput,
+  TextInputProps,
+  View,
+  ViewStyle,
 } from "react-native";
 
 interface InputProps extends TextInputProps {
@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: 14,
+    height: "80%",
   },
 });
 

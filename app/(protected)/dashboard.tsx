@@ -1,5 +1,7 @@
 import { useTheme } from "@/components/themeProvider";
+import Touriste from "@/components/touriste";
 import { useAuth } from "@/contexts/AuthContext";
+import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
@@ -19,55 +21,45 @@ export default function DashboardScreen() {
     <SafeAreaView
       style={[styles.container, { backgroundColor: colors.background }]}
     >
-      <View style={[styles.card, { backgroundColor: colors.surface }]}>
-        <Text style={[styles.title, { color: colors.text }]}>Dashboard</Text>
-        <Text style={[styles.subtitle, { color: colors.textMuted }]}>
-          Bienvenue {user?.email ?? "utilisateur"}
-        </Text>
-
-        <Pressable
-          onPress={handleLogout}
-          style={[styles.button, { backgroundColor: colors.primary }]}
-        >
-          <Text style={[styles.buttonText, { color: colors.onPrimary }]}>
-            Se déconnecter
+      <View style={styles.appBar}>
+        <View style={styles.appBarTitle}>
+          <Text style={[styles.title, { color: colors.text }]}>Dashboard</Text>
+          <Text style={[styles.subtitle, { color: colors.textMuted }]}>
+            {user?.email ?? "utilisateur"}
           </Text>
+        </View>
+        <Pressable
+          accessibilityLabel="Se déconnecter"
+          onPress={handleLogout}
+          style={[styles.logoutButton, { backgroundColor: colors.surface }]}
+        >
+          <Ionicons name="log-out-outline" size={22} color={colors.text} />
         </Pressable>
+        <View style={styles.appBarSpacer} />
       </View>
+
+      <Touriste />
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: "center",
+  container: { flex: 1, paddingHorizontal: 20 },
+  appBar: {
+    minHeight: 76,
+    flexDirection: "row",
     alignItems: "center",
-    padding: 20,
+    justifyContent: "space-between",
   },
-  card: {
-    width: "100%",
-    maxWidth: 420,
-    padding: 24,
-    borderRadius: 20,
-    gap: 12,
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: "700",
-  },
-  subtitle: {
-    fontSize: 16,
-  },
-  button: {
-    marginTop: 20,
-    height: 52,
+  logoutButton: {
+    width: 44,
+    height: 44,
     borderRadius: 14,
     justifyContent: "center",
     alignItems: "center",
   },
-  buttonText: {
-    fontSize: 15,
-    fontWeight: "600",
-  },
+  appBarTitle: { flex: 1, alignItems: "center" },
+  appBarSpacer: { width: 10 },
+  title: { fontSize: 24, fontWeight: "700" },
+  subtitle: { fontSize: 12, marginTop: 3 },
 });

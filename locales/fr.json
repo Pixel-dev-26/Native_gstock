@@ -1,0 +1,43 @@
+{
+  "common": {
+    "french": "Français",
+    "english": "Anglais",
+    "darkMode": "Mode sombre",
+    "lightMode": "Mode clair",
+    "close": "Fermer",
+    "save": "Enregistrer",
+    "loading": "Chargement..."
+  },
+  "login": {
+    "welcome": "Bienvenue",
+    "subtitle": "Connectez-vous à votre espace sécurisé",
+    "email": "Adresse email",
+    "password": "Mot de passe",
+    "forgotPassword": "Mot de passe oublié ?",
+    "login": "Se connecter",
+    "continueWith": "ou continuer avec",
+    "noAccount": "Vous n'avez pas de compte ?",
+    "signUp": "S'inscrire"
+  },
+  "dashboard": {
+    "title": "Tableau de bord",
+    "userFallback": "utilisateur",
+    "logout": "Se déconnecter"
+  },
+  "tourists": {
+    "one": "touriste",
+    "many": "touristes",
+    "add": "Ajouter",
+    "emptyTitle": "Aucun touriste",
+    "emptyDescription": "Ajoutez votre premier touriste.",
+    "newTitle": "Nouveau touriste",
+    "editTitle": "Modifier le touriste",
+    "fullName": "Nom complet",
+    "email": "Adresse email",
+    "deleteTitle": "Supprimer ce touriste ?",
+    "deleteDescription": "{{name}} sera définitivement supprimé.",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "required": "Le nom et l'email sont obligatoires."
+  }
+}

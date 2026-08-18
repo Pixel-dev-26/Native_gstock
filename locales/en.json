@@ -1,0 +1,43 @@
+{
+  "common": {
+    "french": "French",
+    "english": "English",
+    "darkMode": "Dark mode",
+    "lightMode": "Light mode",
+    "close": "Close",
+    "save": "Save",
+    "loading": "Loading..."
+  },
+  "login": {
+    "welcome": "Welcome back",
+    "subtitle": "Sign in to access your secure workspace",
+    "email": "Email address",
+    "password": "Password",
+    "forgotPassword": "Forgot password?",
+    "login": "Log in",
+    "continueWith": "or continue with",
+    "noAccount": "Don't have an account?",
+    "signUp": "Sign up"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "userFallback": "user",
+    "logout": "Log out"
+  },
+  "tourists": {
+    "one": "tourist",
+    "many": "tourists",
+    "add": "Add",
+    "emptyTitle": "No tourists",
+    "emptyDescription": "Add your first tourist.",
+    "newTitle": "New tourist",
+    "editTitle": "Edit tourist",
+    "fullName": "Full name",
+    "email": "Email address",
+    "deleteTitle": "Delete this tourist?",
+    "deleteDescription": "{{name}} will be permanently deleted.",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "required": "Name and email are required."
+  }
+}

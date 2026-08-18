@@ -1,3 +1,4 @@
+import i18n from "@/localization/i18n";
 import { touristService } from "@/services/touristService";
 import { useCallback, useEffect, useState } from "react";
 import { getTouristErrorMessage } from "./error";
@@ -34,7 +35,7 @@ export function useTourists() {
     touristData: TouristInput,
   ) => {
     if (!touristData.name || !touristData.email) {
-      setErrorMessage("Le nom et l’email sont obligatoires.");
+      setErrorMessage(i18n.t("tourists.required"));
       return false;
     }
 

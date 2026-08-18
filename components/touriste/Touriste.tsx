@@ -1,6 +1,7 @@
 import { useTheme } from "@/components/themeProvider";
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
     ActivityIndicator,
     Alert,
@@ -14,8 +15,9 @@ import TouristFormModal from "./TouristFormModal";
 import TouristRow from "./TouristRow";
 import { Tourist } from "./types";
 import { useTourists } from "./useTourists";
-const Touriste = ()=>{
+const Touriste = () => {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [editingTourist, setEditingTourist] = useState<Tourist | null>(null);
   const {
@@ -37,12 +39,12 @@ const Touriste = ()=>{
 
   const handleDelete = (tourist: Tourist) => {
     Alert.alert(
-      "Supprimer ce touriste ?",
-      `${tourist.name} sera définitivement supprimé.`,
+      t("tourists.deleteTitle"),
+      t("tourists.deleteDescription", { name: tourist.name }),
       [
-        { text: "Annuler", style: "cancel" },
+        { text: t("tourists.cancel"), style: "cancel" },
         {
-          text: "Supprimer",
+          text: t("tourists.delete"),
           style: "destructive",
           onPress: () => deleteTourist(tourist),
         },
@@ -59,7 +61,8 @@ const Touriste = ()=>{
     <View style={styles.content}>
       <View style={styles.toolbar}>
         <Text style={[styles.count, { color: colors.textMuted }]}>
-          {tourists.length} {tourists.length === 1 ? "touriste" : "touristes"}
+          {tourists.length}{" "}
+          {tourists.length === 1 ? t("tourists.one") : t("tourists.many")}
         </Text>
         <Pressable
           onPress={() => {
@@ -70,7 +73,7 @@ const Touriste = ()=>{
         >
           <Ionicons name="add" size={20} color={colors.onPrimary} />
           <Text style={[styles.buttonText, { color: colors.onPrimary }]}>
-            Ajouter
+            {t("tourists.add")}
           </Text>
         </Pressable>
       </View>
@@ -112,10 +115,10 @@ const Touriste = ()=>{
                 color={colors.textMuted}
               />
               <Text style={[styles.emptyTitle, { color: colors.text }]}>
-                Aucun touriste
+                {t("tourists.emptyTitle")}
               </Text>
               <Text style={[styles.emptyText, { color: colors.textMuted }]}>
-                Ajoutez votre premier touriste.
+                {t("tourists.emptyDescription")}
               </Text>
             </View>
           }
@@ -141,7 +144,7 @@ const Touriste = ()=>{
       />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   content: { flex: 1 },

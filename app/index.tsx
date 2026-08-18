@@ -1,6 +1,7 @@
 import Button from "@/components/button";
 import Header from "@/components/header";
 import Input from "@/components/input";
+import LanguageToggle from "@/components/languageToggle";
 import MediaBtn from "@/components/mediaBtn";
 import TextCustomise from "@/components/textCustomise";
 import { useTheme } from "@/components/themeProvider";
@@ -9,21 +10,23 @@ import { Ionicons } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import { Link, useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
-  ActivityIndicator,
-  KeyboardAvoidingView,
-  Platform,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
+    ActivityIndicator,
+    KeyboardAvoidingView,
+    Platform,
+    Pressable,
+    ScrollView,
+    StyleSheet,
+    Text,
+    View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Index() {
   const router = useRouter();
   const { colors, theme, toggleTheme } = useTheme();
+  const { t } = useTranslation();
   const { login, isLoading, error, clearError, isAuthenticated } = useAuth();
   const [email, setEmail] = useState("test@example.com");
   const [password, setPassword] = useState("password123");
@@ -79,10 +82,11 @@ export default function Index() {
                   color={isLight ? "#333" : "#fff"}
                 />
                 <TextCustomise typeText="normal">
-                  {isLight ? "Dark" : "Light"} mode
+                  {isLight ? t("common.darkMode") : t("common.lightMode")}
                 </TextCustomise>
               </View>
             </Pressable>
+            <LanguageToggle />
           </View>
 
           <View style={styles.firstChild}>
@@ -97,15 +101,14 @@ export default function Index() {
                 source={require("@/assets/images/logo.svg")}
                 style={styles.logo}
               />
-              <Header
-                title="Welcome Back"
-                txt="Sign in to access your secure workspace"
-              />
+              <Header title={t("login.welcome")} txt={t("login.subtitle")} />
             </View>
             <View style={styles.inputGroup}>
               <View style={{ gap: 16 }}>
                 <View>
-                  <TextCustomise typeText="normal">Email Address</TextCustomise>
+                  <TextCustomise typeText="normal">
+                    {t("login.email")}
+                  </TextCustomise>
                   <Input
                     imageSrc={require("@/assets/images/mail.svg")}
                     placeholder="sarah.chen@design.co"
@@ -116,7 +119,9 @@ export default function Index() {
                   />
                 </View>
                 <View>
-                  <TextCustomise typeText="normal">Password</TextCustomise>
+                  <TextCustomise typeText="normal">
+                    {t("login.password")}
+                  </TextCustomise>
                   <View
                     style={{
                       display: "flex",
@@ -150,13 +155,13 @@ export default function Index() {
                 style={{ color: colors.primary, textAlign: "right" }}
               >
                 <TextCustomise typeText="normal">
-                  Forgot password?
+                  {t("login.forgotPassword")}
                 </TextCustomise>
               </Link>
             </View>
             <View style={styles.card3}>
               <Button
-                txt={isLoading ? "Loading..." : "Log In"}
+                txt={isLoading ? t("common.loading") : t("login.login")}
                 onPress={handleLogin}
                 disabled={isLoading}
               />
@@ -176,7 +181,7 @@ export default function Index() {
                     <Text
                       style={[styles.snackbarAction, { color: colors.primary }]}
                     >
-                      Fermer
+                      {t("common.close")}
                     </Text>
                   </Pressable>
                 </View>
@@ -192,7 +197,7 @@ export default function Index() {
                   typeText="default"
                   style={{ textAlign: "center", textTransform: "uppercase" }}
                 >
-                  or continue with
+                  {t("login.continueWith")}
                 </TextCustomise>
                 <View style={[styles.line, { backgroundColor: colors.line }]} />
               </View>
@@ -211,10 +216,13 @@ export default function Index() {
 
           <View style={styles.secondChild}>
             <TextCustomise typeText="txtMedium">
-              Don&apos;t have an account?
+              {t("login.noAccount")}
             </TextCustomise>
             <Link href={"/auth"} style={{ color: colors.primary }}>
-              <TextCustomise typeText="txtBack"> Sign up</TextCustomise>
+              <TextCustomise typeText="txtBack">
+                {" "}
+                {t("login.signUp")}
+              </TextCustomise>
             </Link>
           </View>
         </ScrollView>
@@ -239,7 +247,10 @@ const styles = StyleSheet.create({
   },
   themeToggleRow: {
     width: "100%",
-    alignItems: "flex-end",
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    alignItems: "center",
+    gap: 8,
     paddingRight: 18,
     paddingTop: 18,
   },

@@ -1,5 +1,6 @@
 import { useTheme } from "@/components/themeProvider";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
     ActivityIndicator,
     KeyboardAvoidingView,
@@ -29,6 +30,7 @@ export default function TouristFormModal({
   onSubmit,
 }: TouristFormModalProps) {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const [name, setName] = useState(tourist?.name ?? "");
   const [email, setEmail] = useState(tourist?.email ?? "");
 
@@ -53,14 +55,14 @@ export default function TouristFormModal({
         <View style={[styles.modal, { backgroundColor: colors.surface }]}>
           <View style={styles.header}>
             <Text style={[styles.title, { color: colors.text }]}>
-              {tourist ? "Modifier le touriste" : "Nouveau touriste"}
+              {tourist ? t("tourists.editTitle") : t("tourists.newTitle")}
             </Text>
             <Pressable onPress={onClose} accessibilityLabel="Fermer">
               <Text style={[styles.close, { color: colors.textMuted }]}>X</Text>
             </Pressable>
           </View>
           <TextInput
-            placeholder="Nom complet"
+            placeholder={t("tourists.fullName")}
             placeholderTextColor={colors.textMuted}
             value={name}
             onChangeText={setName}
@@ -71,7 +73,7 @@ export default function TouristFormModal({
             autoCapitalize="words"
           />
           <TextInput
-            placeholder="Adresse email"
+            placeholder={t("tourists.email")}
             placeholderTextColor={colors.textMuted}
             value={email}
             onChangeText={setEmail}
@@ -91,7 +93,7 @@ export default function TouristFormModal({
               <ActivityIndicator color={colors.onPrimary} />
             ) : (
               <Text style={[styles.saveText, { color: colors.onPrimary }]}>
-                Enregistrer
+                {t("common.save")}
               </Text>
             )}
           </Pressable>

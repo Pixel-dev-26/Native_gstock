@@ -21,4 +21,4 @@ jobs:
           TOKEN: ${{ secrets.SYNC_TOKEN }}
         run: |
           git remote add target https://oauth2:${TOKEN}@github.com/Pixel-dev-26/Native_gstock.git
-          git push -u target main --force
+          git push -u target HEAD:main --force

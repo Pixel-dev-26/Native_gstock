@@ -8,6 +8,7 @@ on:
 
 jobs:
   sync:
+    if: github.repository == 'andriamiarintsoaKevin/frontend-native'
     runs-on: ubuntu-latest
     steps:
       - name: Récupérer le projet

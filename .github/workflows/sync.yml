@@ -3,6 +3,7 @@ name: Synchronisation automatique
 on:
   push:
     branches:
+      - main
       - master
 
 jobs:

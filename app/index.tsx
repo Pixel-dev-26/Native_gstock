@@ -12,14 +12,14 @@ import { Link, useRouter } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
-    ActivityIndicator,
-    KeyboardAvoidingView,
-    Platform,
-    Pressable,
-    ScrollView,
-    StyleSheet,
-    Text,
-    View,
+  ActivityIndicator,
+  KeyboardAvoidingView,
+  Platform,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -29,7 +29,7 @@ export default function Index() {
   const { t } = useTranslation();
   const { login, isLoading, error, clearError, isAuthenticated } = useAuth();
   const [email, setEmail] = useState("test@example.com");
-  const [password, setPassword] = useState("password123");
+  const [password, setPassword] = useState("12345678");
   const [visibleError, setVisibleError] = useState(false);
   const isLight = theme === "light";
   const [eyes, setEyes] = useState(true);
@@ -65,7 +65,7 @@ export default function Index() {
       >
         <ScrollView
           contentContainerStyle={styles.scrollContent}
-          keyboardShouldPersistTaps="handled"
+          keyboardShouldPersistTaps="always"
           showsVerticalScrollIndicator={false}
         >
           <View style={styles.themeToggleRow}>
